@@ -1228,6 +1228,7 @@ transform: scale(1.1);
 /* ===== BONUS BANNER ===== */
 .bonus-banner {
 background: linear-gradient(45deg, #FFD700, #FFA500, #FF6B35);
+font-family: 'Inter', sans-serif;
 color: #1a1a1a;
 border-radius: 24px;
 padding: 25px;
