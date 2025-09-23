@@ -1624,41 +1624,6 @@ line-height: 1.6;
 margin: 0;
 }
 
-/* Location Section */
-.location-section {
-margin-bottom: 60px;
-}
-
-.location-section h3 {
-font-size: 1.8rem;
-font-weight: 600;
-margin-bottom: 30px;
-color: #fbbf24;
-text-align: center;
-}
-
-.location-grid {
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 40px;
-align-items: start;
-}
-
-.location-item {
-margin-bottom: 24px;
-}
-
-.location-item h4 {
-color: #fbbf24;
-margin-bottom: 8px;
-font-size: 1.1rem;
-}
-
-.location-item p {
-opacity: 0.9;
-line-height: 1.6;
-margin: 0;
-}
 
 .map-container {
 border-radius: 16px;
