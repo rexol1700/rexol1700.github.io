@@ -1323,11 +1323,13 @@ z-index: 1;
 
 .contact-header {
 text-align: center;
+font-family: 'Inter', sans-serif;
 margin-bottom: 60px;
 }
 
 .contact-header h2 {
 font-size: 2.8rem;
+font-family: 'Inter', sans-serif;
 font-weight: 700;
 margin-bottom: 16px;
 background: linear-gradient(135deg, #fbbf24, #f59e0b, #d97706);
@@ -1337,6 +1339,7 @@ background-clip: text;
 }
 
 .contact-header p {
+font-family: 'Inter', sans-serif;
 font-size: 1.2rem;
 opacity: 0.9;
 max-width: 600px;
@@ -1346,10 +1349,12 @@ line-height: 1.6;
 
 /* Emergency Contact */
 .emergency-contact {
+font-family: 'Inter', sans-serif;
 margin-bottom: 60px;
 }
 
 .emergency-card {
+font-family: 'Inter', sans-serif;
 background: linear-gradient(135deg, #dc2626, #b91c1c);
 border-radius: 20px;
 padding: 30px;
@@ -1371,6 +1376,7 @@ color: white;
 }
 
 .emergency-card h3 {
+font-family: 'Inter', sans-serif;
 font-size: 1.8rem;
 font-weight: 700;
 margin-bottom: 20px;
@@ -1378,6 +1384,7 @@ color: white;
 }
 
 .emergency-numbers {
+font-family: 'Inter', sans-serif;
 display: flex;
 flex-direction: column;
 gap: 12px;
@@ -1385,6 +1392,7 @@ margin-bottom: 20px;
 }
 
 .emergency-number {
+font-family: 'Inter', sans-serif;
 display: flex;
 justify-content: space-between;
 align-items: center;
@@ -1394,10 +1402,12 @@ border-radius: 12px;
 }
 
 .emergency-number .label {
+font-family: 'Inter', sans-serif;
 font-weight: 600;
 }
 
 .emergency-number .number {
+font-family: 'Inter', sans-serif;
 color: white;
 text-decoration: none;
 font-weight: 700;
@@ -1428,6 +1438,7 @@ margin-bottom: 60px;
 
 .contact-info-card,
 .live-chat-card {
+font-family: 'Inter', sans-serif;
 background: rgba(255, 255, 255, 0.1);
 backdrop-filter: blur(20px);
 border: 1px solid rgba(255, 255, 255, 0.2);
@@ -1437,6 +1448,7 @@ padding: 30px;
 
 .contact-info-card h3,
 .live-chat-card h3 {
+font-family: 'Inter', sans-serif;
 font-size: 1.5rem;
 font-weight: 600;
 margin-bottom: 24px;
@@ -1444,6 +1456,7 @@ color: #fbbf24;
 }
 
 .contact-item {
+font-family: 'Inter', sans-serif;
 display: flex;
 align-items: flex-start;
 gap: 16px;
@@ -1463,6 +1476,7 @@ margin-top: 2px;
 }
 
 .contact-label {
+font-family: 'Inter', sans-serif;
 display: block;
 font-weight: 600;
 color: #fbbf24;
@@ -1482,6 +1496,7 @@ color: #fbbf24;
 
 /* Chat Section */
 .live-chat-card p {
+font-family: 'Inter', sans-serif;
 opacity: 0.9;
 margin-bottom: 16px;
 }
@@ -1555,10 +1570,12 @@ background: rgba(255, 255, 255, 0.2);
 
 /* FAQ Section */
 .faq-section {
+font-family: 'Inter', sans-serif;
 margin-bottom: 60px;
 }
 
 .faq-section h3 {
+font-family: 'Inter', sans-serif;
 font-size: 1.8rem;
 font-weight: 600;
 margin-bottom: 30px;
@@ -1572,6 +1589,7 @@ margin: 0 auto;
 }
 
 .faq-item {
+font-family: 'Inter', sans-serif;
 background: rgba(255, 255, 255, 0.1);
 backdrop-filter: blur(20px);
 border: 1px solid rgba(255, 255, 255, 0.2);
@@ -1581,6 +1599,7 @@ overflow: hidden;
 }
 
 .faq-question {
+font-family: 'Inter', sans-serif;
 padding: 20px;
 cursor: pointer;
 display: flex;
@@ -1608,6 +1627,7 @@ transform: rotate(180deg);
 }
 
 .faq-answer {
+font-family: 'Inter', sans-serif;
 padding: 0 20px;
 max-height: 0;
 overflow: hidden;
@@ -1620,6 +1640,7 @@ max-height: 200px;
 }
 
 .faq-answer p {
+font-family: 'Inter', sans-serif;
 opacity: 0.9;
 line-height: 1.6;
 margin: 0;
