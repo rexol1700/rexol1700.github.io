@@ -1771,7 +1771,7 @@ align-items: center;
 
 .social-follow {
 width: 100%;
-max-width: 200px;
+max-width: 300px;
 justify-content: center;
 }
 }
@@ -1797,4 +1797,23 @@ font-size: 1.2rem;
 .platform-description {
 font-size: 0.9rem;
 }
+}
+
+/* Add specific iPhone sizing */
+@media (max-width: 480px) {
+  .social-support-cta {
+    padding: 20px 10px; /* Even tighter padding for very small screens */
+  }
+  
+  .social-follow {
+    max-width: 260px; /* Further reduce button width */
+    padding: 10px 20px; /* Reduce button padding */
+  }
+}
+
+/* iPhone 12 specific (390px) */
+@media (max-width: 390px) {
+  .social-follow {
+    max-width: 250px;
+  }
 }
