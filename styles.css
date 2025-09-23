@@ -1292,9 +1292,6 @@ font-size: 1.6rem;
 
 /* ===== CONTACT SUPPORT SECTION ===== */
 .contact-support-section {
-background: linear-gradient(135deg, #1e3a8a 0%, #312e81 50%, #1e1b4b 100%);
-/* Add this line: */
-background-attachment: fixed;
 padding: 80px 20px;
 position: relative;
 overflow: hidden;
