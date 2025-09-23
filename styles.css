@@ -1271,6 +1271,7 @@ box-shadow: 0 12px 24px rgba(0,0,0,0.15);
 font-size: 1.8rem;
 font-weight: 800;
 display: block;
+color: #ffffff;
 text-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 
@@ -1278,6 +1279,7 @@ text-shadow: 0 2px 4px rgba(0,0,0,0.3);
 font-size: 0.9rem;
 opacity: 0.8;
 margin-top: 6px;
+  color: #ffffff;
 font-weight: 500;
 }
 
