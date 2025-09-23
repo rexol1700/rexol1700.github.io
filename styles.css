@@ -699,6 +699,7 @@ pointer-events: none;
 
 /* ===== CONTAINER ===== */
 .social-container {
+background: linear-gradient(135deg, #1e3a8a 0%, #312e81 50%, #1e1b4b 100%);
 max-width: 1200px;
 margin: 0 auto;
 padding: 0 20px;
