@@ -393,7 +393,7 @@ background: linear-gradient(135deg, #fbbf24, #f59e0b);
 border-radius: 50%;
 display: flex;
 align-items: center;
-justify-content: left;
+justify-content: center;
 font-weight: 700;
 font-size: 0.9rem;
 color: #1e1b4b;
@@ -412,7 +412,7 @@ background: linear-gradient(135deg, #fbbf24, #f59e0b);
 border-radius: 16px;
 display: flex;
 align-items: center;
-justify-content: left;
+justify-content: center;
 margin-bottom: 20px;
 color: #1e1b4b;
 }
@@ -715,7 +715,6 @@ background: linear-gradient(135deg, #1e3a8a 0%, #312e81 50%, #1e1b4b 100%);
 max-width: 100%;
 margin: 0 auto;
 padding: 0 20px;
-text-align: center;
 position: relative;
 z-index: 1;
 }
