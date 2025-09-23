@@ -10,7 +10,7 @@ body {
 /* ===== PAYMENT SECTION ===== */
 
 .payment-section {
-padding: 0px 20px;
+padding: 0px 0px;
 position: relative;
 overflow: hidden;
 z-index: 10;
@@ -754,6 +754,7 @@ background: rgba(255,255,255,0.08);
 backdrop-filter: blur(25px) saturate(120%);
 border-radius: 32px;
 padding: 40px 30px;
+text-align: center;
 border: 1px solid rgba(255,255,255,0.18);
 box-shadow:
 0 20px 40px rgba(0,0,0,0.1),
