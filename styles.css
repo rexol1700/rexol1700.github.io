@@ -741,6 +741,7 @@ opacity: 0.9;
 .social-grid {
 display: grid;
 grid-template-columns: 1fr;
+text-align: center;
 gap: 40px;
 margin: 40px 0;
 max-width: 800px;
