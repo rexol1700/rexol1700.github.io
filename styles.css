@@ -1038,8 +1038,6 @@ box-shadow:
 background: rgba(255,255,255,0.9);
 color: #4285F4;
 border: 2px solid transparent;
-background-image: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)),
-linear-gradient(45deg, #4285F4, #34A853, #FBBC05, #EA4335);
 background-origin: border-box;
 background-clip: content-box, border-box;
 box-shadow:
