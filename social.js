@@ -56,7 +56,7 @@ safeGtag('event','instagram_share_click',{event_category:'social_engagement',eve
 // Facebook
 window.followFacebook = function(ev){
 var btn = ev && ev.currentTarget ? ev.currentTarget : null;
-window.open('https://www.facebook.com/nytsauna', '_blank'); // replace with your page
+window.open('https://www.facebook.com/p/T%C3%A6ppstars-61573512610610/', '_blank'); // replace with your page
 if (btn){
 var original = btn.innerHTML;
 btn.innerHTML = '✅ TAKK!';
