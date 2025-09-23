@@ -10,7 +10,7 @@ body {
 /* ===== PAYMENT SECTION ===== */
 
 .payment-section {
-padding: 80px 20px;
+padding: 40px 20px;
 position: relative;
 overflow: hidden;
 z-index: 10;
@@ -734,6 +734,7 @@ background-clip: text;
 font-size: 1.4rem;
 margin-bottom: 50px;
 opacity: 0.9;
+color: #ffffff;
 }
 
 /* ===== GRID LAYOUT ===== */
