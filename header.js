@@ -1,4 +1,3 @@
-<script>
 // Header scroll behavior
 const header = document.querySelector('.site-header');
 let lastScrollY = window.scrollY;
@@ -27,4 +26,4 @@ window.addEventListener('scroll', () => {
 
 // Initialize header state
 handleScroll();
-</script>
+
