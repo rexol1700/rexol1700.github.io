@@ -1292,7 +1292,6 @@ font-size: 1.6rem;
 
 /* ===== CONTACT SUPPORT SECTION ===== */
 .contact-support-section {
-font-family: 'Inter', sans-serif;
 padding: 80px 20px;
 position: relative;
 overflow: hidden;
@@ -1316,6 +1315,7 @@ pointer-events: none;
 
 .contact-container {
 max-width: 1000px;
+font-family: 'Inter', sans-serif;
 margin: 0 auto;
 position: relative;
 z-index: 1;
