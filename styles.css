@@ -1292,6 +1292,7 @@ font-size: 1.6rem;
 
 /* ===== CONTACT SUPPORT SECTION ===== */
 .contact-support-section {
+font-family: 'Inter', sans-serif;
 padding: 80px 20px;
 position: relative;
 overflow: hidden;
@@ -1635,11 +1636,12 @@ box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 /* Social Support CTA */
 .social-support-cta {
 text-align: center;
+font-family: 'Inter', sans-serif;
 background: rgba(255, 255, 255, 0.1);
 backdrop-filter: blur(20px);
 border: 1px solid rgba(255, 255, 255, 0.2);
 border-radius: 20px;
-padding: 40px;
+padding: 40px 40px;
 }
 
 .social-support-cta h3 {
