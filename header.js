@@ -1,29 +1,49 @@
-// Header scroll behavior
-const header = document.querySelector('.site-header');
-let lastScrollY = window.scrollY;
+// Mobile sticky navigation
+function initMobileStickyNav() {
+  const header = document.querySelector('.site-header');
+  let lastScrollTop = 0;
+  let isScrolled = false;
 
-function handleScroll() {
-  if (window.scrollY > 100) {
-    header.classList.add('compact');
-  } else {
-    header.classList.remove('compact');
+  // Only apply on mobile
+  function isMobile() {
+    return window.innerWidth <= 768;
   }
-  
-  lastScrollY = window.scrollY;
+
+  function handleScroll() {
+    if (!isMobile()) {
+      // Remove scrolled class on desktop
+      if (header.classList.contains('scrolled')) {
+        header.classList.remove('scrolled');
+      }
+      return;
+    }
+
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    
+    if (scrollTop > 50 && !isScrolled) {
+      header.classList.add('scrolled');
+      isScrolled = true;
+    } else if (scrollTop <= 50 && isScrolled) {
+      header.classList.remove('scrolled');
+      isScrolled = false;
+    }
+  }
+
+  // Throttle scroll events for better performance
+  let ticking = false;
+  function onScroll() {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        handleScroll();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }
+
+  window.addEventListener('scroll', onScroll);
+  window.addEventListener('resize', handleScroll); // Handle orientation changes
 }
 
-// Throttle scroll events for better performance
-let ticking = false;
-window.addEventListener('scroll', () => {
-  if (!ticking) {
-    window.requestAnimationFrame(() => {
-      handleScroll();
-      ticking = false;
-    });
-    ticking = true;
-  }
-});
-
-// Initialize header state
-handleScroll();
-
+// Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', initMobileStickyNav);
