@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sjøden Bastu - Sikker betaling og booking</title>
+    <meta name="description" content="Book din private saunaopplevelse ved sjøen. Sikker betaling med Vipps.">
+    
+    <!-- CSS Styles -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>  
+<section class="social-section">
+    <div class="social-container">
+        
+        <!-- PAYMENT CONTENT -->
+        <div class="payment-container">
+            <div class="payment-header">
+                <h2 class="payment-title">Sikker betaling</h2>
+                <p class="payment-subtitle">Enkelt og trygt med Vipps</p>
+            </div>
+
+            <div class="payment-card">
+                <div class="pricing-info">
+                    <div class="price-display">
+                        <span class="currency">NOK</span>
+                        <span class="amount">125</span>
+                        <span class="period">per pers</span>
+                    </div>
+                    <div class="price-includes">
+                        <div class="include-item">
+                            <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span>Privat sauna i 3 timer</span>
+                        </div>
+                        <div class="include-item">
+                            <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span>Ved og fyrstikker inkludert</span>
+                        </div>
+                        <div class="include-item">
+                            <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span>Håndklær og badekåper</span>
+                        </div>
+                        <div class="include-item">
+                            <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span>Naturopplevelse ved sjøen</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="payment-form">
+                    <button class="vipps-button" id="vippsPayButton" onclick="initiateVippsPayment()">
+                        <div class="vipps-content">
+                            <span class="vipps-text">Betal med Vipps</span>
+                        </div>
+                        <div class="loading-spinner" style="display: none;">
+                            <div class="spinner"></div>
+                        </div>
+                    </button>
+
+                    <div class="payment-security">
+                        <div class="security-badges">
+                            <div class="security-badge">
+                                <svg class="shield-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                    <path d="m9 12 2 2 4-4"></path>
+                                </svg>
+                                <span>SSL-sikret</span>
+                            </div>
+                            <div class="security-badge">
+                                <svg class="lock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                    <circle cx="12" cy="16" r="1"></circle>
+                                    <path d="m7 11V7a5 5 0 0 1 10 0v4"></path>
+                                </svg>
+                                <span>Trygg betaling</span>
+                            </div>
+                        </div>
+                        <p class="payment-terms">
+                            Ved å betale godtar du våre
+                            <a href="#terms" class="terms-link">vilkår og betingelser</a>
+                        </p>
+                    </div>
+
+                    <div class="payment-support">
+                        <p class="support-text">Trenger du hjelp? <a href="#contact" class="support-link">Kontakt oss</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SAUNA INSTRUCTIONS CONTENT -->
+        <div id="sauna-instructions" class="instructions-container">
+            <div class="instructions-header">
+                <h2>Ditt saunarituale</h2>
+                <p>En trinn-for-trinn guide til den perfekte saunaopplevelsen</p>
+            </div>
+
+            <div class="instructions-grid">
+                <div class="instruction-card" data-step="1">
+                    <div class="card-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 2v6m0 8v6M4.93 4.93l4.24 4.24m5.66 5.66l4.24 4.24M2 12h6m8 0h6M4.93 19.07l4.24-4.24m5.66-5.66l4.24-4.24" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <h3>Tenne Saunaen</h3>
+                    <p>Følg den enkle prosessen for å få saunaen til optimal temperatur (80-90°C).</p>
+                    <div class="step-details">
+                        <ul>
+                            <li>Åpne luftventilene</li>
+                            <li>Legg ved i vedovnen</li>
+                            <li>Tenn opp og vent 45-60 min</li>
+                            <li>Temperatur: 80-90°C</li>
+                        </ul>
+                    </div>
+                    <button class="video-trigger" data-video="lighting-guide">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                            <polygon points="5,3 19,12 5,21" fill="currentColor"/>
+                        </svg>
+                        Se videoinstruks
+                    </button>
+                </div>
+
+                <div class="instruction-card" data-step="2">
+                    <div class="card-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h3>Sikkerhet Først</h3>
+                    <p>Viktige sikkerhetsregler for en trygg og hyggelig opplevelse.</p>
+                    <div class="step-details">
+                        <ul>
+                            <li>Aldri forlat brennende ovn</li>
+                            <li>Hold vanningsspann tilgjengelig</li>
+                            <li>Lytt til kroppen din</li>
+                            <li>Nødnummer: <strong>113</strong></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="instruction-card" data-step="3">
+                    <div class="card-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h3>Nyt Opplevelsen</h3>
+                    <p>Tips for å få mest mulig ut av din saunatime og skape minnerike øyeblikk.</p>
+                    <div class="step-details">
+                        <ul>
+                            <li>Start med 10-15 min økter</li>
+                            <li>Ta pauser for kjøling</li>
+                            <li>Hydrér regelmessig</li>
+                            <li>Del opplevelsen på sosiale medier!</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="weather-section">
+                <div class="weather-card">
+                    <h3>Dagens værforhold</h3>
+                    <div class="weather-widget">
+                        <div id="weather-widget" class="weather-display">
+                            <div class="weather-loading">
+                                <div class="loading-spinner"></div>
+                                <p>Henter værdata...</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="weather-tip">💡 <strong>Tips:</strong> Sjekk været før du drar - en sauna i snøvær er magisk!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SOCIAL MEDIA CONTENT -->
+        <h2 class="social-header">
+            📱 DEL DIN MAGISKE OPPLEVELSE
+        </h2>
+
+        <p class="social-subtext">
+            Bli del av fellesskapet og inspirer andre til å oppleve bastumagi
+        </p>
+
+        <div class="social-grid">
+            <!-- INSTAGRAM SIDE -->
+            <div class="platform-card instagram-card glass-pane">
+                <span class="platform-icon">📸</span>
+                <h3 class="platform-title">FANG ØYEBLIKKET</h3>
+                <p class="platform-description">
+                    Del din glødeøyeblikk med verden og inspirer andre til å oppleve bastumagi
+                </p>
+
+                <div class="instagram-preview">
+                    <div class="post-header">
+                        <div class="profile-pic">DU</div>
+                        <div>
+                            <strong style="font-size: 12px;">ditt_brukernavn</strong><br>
+                            <small style="color: #8e8e8e; font-size: 10px;">📍 Oceanside Bastu</small>
+                        </div>
+                    </div>
+
+                    <div class="post-content">
+                        Ren lykksalighet på Oceanside Bastu 🔥🌊<br><br>
+                        Ingenting slår norsk bastukultur!<br><br>
+                        <span class="hashtags">
+                            #OceansideBastu #NorgeBastu #BastuLiv #Hygge
+                        </span>
+                    </div>
+                </div>
+
+                <button class="platform-btn instagram-btn" onclick="shareInstagram()">
+                    📱 DEL PÅ INSTAGRAM
+                </button>
+
+                <small style="opacity: 0.8; font-size: 0.85rem;">Ferdig tekst kopieres automatisk!</small>
+            </div>
+
+            <!-- FACEBOOK SIDE -->
+            <div class="platform-card facebook-card">
+                <span class="platform-icon">👥</span>
+                <h3 class="platform-title">BLI MED I FELLESSKAPET</h3>
+                <p class="platform-description">
+                    Få eksklusive tips, værvarsel for bastudager og bli del av Norges varmeste community
+                </p>
+
+                <div class="facebook-embed">
+                    <div style="text-align: center; padding: 20px; color: #1877F2;">
+                        <div style="font-size: 2rem; margin-bottom: 10px;">👥</div>
+                        <div style="font-weight: 600; margin-bottom: 5px;">Oceanside Bastu</div>
+                        <div style="font-size: 0.9rem; color: #666;">1,847 følgere</div>
+                        <div style="margin-top: 10px; font-size: 0.8rem; color: #666;">Følg oss for oppdateringer!</div>
+                    </div>
+                </div>
+
+                <button class="platform-btn facebook-btn" onclick="followFacebook()">
+                    👍 FØLG OSS
+                </button>
+
+                <div style="font-size: 0.85rem; opacity: 0.8; margin-top: 10px;">
+                    🌤️ Værvarsel • 💰 Rabatter • 📅 Events
+                </div>
+            </div>
+        </div>
+
+        <!-- INSTAGRAM GALLERY SECTION -->
+        <div class="instagram-gallery-section">
+            <div class="gallery-header">
+                <h3>🔥 Fra våre gjester</h3>
+                <a href="https://instagram.com/nytsauna" class="view-all-link" target="_blank">
+                    Se alle på Instagram ↗
+                </a>
+            </div>
+
+            <div class="photo-grid">
+                <div class="photo-item" data-photo="1">
+                    <img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=300&h=300&fit=crop&crop=center" alt="Sauna opplevelse" loading="lazy">
+                    <div class="photo-overlay">
+                        <div class="photo-stats">
+                            <span>❤️ 127</span>
+                            <span>💬 12</span>
+                        </div>
+                        <button class="share-photo" data-photo="1">
+                            <span>📤</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="photo-item" data-photo="2">
+                    <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=300&h=300&fit=crop&crop=center" alt="Flytende sauna" loading="lazy">
+                    <div class="photo-overlay">
+                        <div class="photo-stats">
+                            <span>❤️ 89</span>
+                            <span>💬 8</span>
+                        </div>
+                        <button class="share-photo" data-photo="2">
+                            <span>📤</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="photo-item" data-photo="3">
+                    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=300&h=300&fit=crop&crop=center" alt="Fjord utsikt" loading="lazy">
+                    <div class="photo-overlay">
+                        <div class="photo-stats">
+                            <span>❤️ 156</span>
+                            <span>💬 23</span>
+                        </div>
+                        <button class="share-photo" data-photo="3">
+                            <span>📤</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="photo-item" data-photo="4">
+                    <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=300&h=300&fit=crop&crop=center" alt="Badstue interiør" loading="lazy">
+                    <div class="photo-overlay">
+                        <div class="photo-stats">
+                            <span>❤️ 203</span>
+                            <span>💬 34</span>
+                        </div>
+                        <button class="share-photo" data-photo="4">
+                            <span>📤</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BONUS BANNER -->
+        <div class="bonus-banner">
+            <strong style="font-size: 1.2rem;">🎁 DOBBEL BONUS!</strong><br>
+            Tag oss på Instagram <strong>OG</strong> følg oss på Facebook = <strong>15% rabatt</strong> på neste booking!
+        </div>
+
+        <!-- SOSIAL STATISTIKK -->
+        <div class="social-stats">
+            <div class="stat-item">
+                <span class="stat-number">2.4K+</span>
+                <div class="stat-label">Instagram følgere</div>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">1.8K+</span>
+                <div class="stat-label">Facebook venner</div>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">500+</span>
+                <div class="stat-label">Delte opplevelser</div>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">4.9⭐</span>
+                <div class="stat-label">Gjennomsnitt</div>
+            </div>
+        </div>
+
+        <!-- GOOGLE REVIEW SECTION -->
+        <h2 class="social-header">Hjelp Andre Finne Oss</h2>
+        <p class="social-subtext">Din opplevelse hjelper andre med å oppdage bastumagi.</p>
+
+        <div class="social-grid">
+            <div class="platform-card google-card">
+                <span class="platform-icon">⭐</span>
+                <h3 class="platform-title">GOOGLE ANMELDELSE</h3>
+                <p class="platform-description">
+                    Din tilbakemelding hjelper fremtidige gjester med å velge den ultimate sauna-opplevelsen.
+                </p>
+
+                <div class="google-preview">
+                    <div class="review-header">
+                        <div class="google-logo">G</div>
+                        <div>
+                            <strong>Google Reviews</strong><br>
+                            <small>Oceanside Bastu</small>
+                        </div>
+                    </div>
+
+                    <div class="stars">★★★★★</div>
+
+                    <div class="review-text">
+                        "Utrolig opplevelse! Perfekt kombinasjon av varme og fjordutsikt..."
+                    </div>
+
+                    <div class="review-author">
+                        - Din anmeldelse kan inspirere andre
+                    </div>
+                </div>
+
+                <button class="platform-btn google-btn" onclick="leaveGoogleReview(event)">
+                    📝 DEL DIN OPPLEVELSE
+                </button>
+
+                <small>Kun hvis du har hatt en god opplevelse</small>
+            </div>
+        </div>
+
+        <!-- CONTACT & SUPPORT CONTENT -->
+        <div id="contact-support" class="contact-container">
+            <div class="contact-header">
+                <h2>Kontakt & Support</h2>
+                <p>Vi er her for å hjelpe deg med en fantastisk saunaopplevelse</p>
+            </div>
+
+            <div class="emergency-contact">
+                <div class="emergency-card">
+                    <div class="emergency-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h3>Nødkontakt</h3>
+                    <div class="emergency-numbers">
+                        <div class="emergency-number">
+                            <span class="label">Brann/Politi/Ambulanse:</span>
+                            <a href="tel:113" class="number">113</a>
+                        </div>
+                        <div class="emergency-number">
+                            <span class="label">Sauna Support 24/7:</span>
+                            <a href="tel:+4798765432" class="number">+47 987 65 432</a>
+                        </div>
+                    </div>
+                    <p class="emergency-note">Ring kun ved akutt nødsituasjon. For vanlige spørsmål, bruk FAQ nedenfor.</p>
+                </div>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-info-card">
+                    <h3>Kontaktinformasjon</h3>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                                <polyline points="22,6 12,13 2,6" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <span class="contact-label">E-post</span>
+                            <a href="mailto:hei@nytsauna.no" class="contact-value">hei@nytsauna.no</a>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <span class="contact-label">Telefon</span>
+                            <a href="tel:+4712345678" class="contact-value">+47 123 45 678</a>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="2"/>
+                                <path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 7 8 11.7z" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <span class="contact-label">Adresse</span>
+                            <span class="contact-value">Saunavegen 42, 1234 Saunastad</span>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                                <polyline points="12,6 12,12 16,14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <span class="contact-label">Åpningstider</span>
+                            <div class="contact-value">
+                                <div>Man-Fre: 06:00-22:00</div>
+                                <div>Lør-Søn: 08:00-20:00</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="live-chat-card">
+                    <h3>Live Chat</h3>
+                    <p>Få øyeblikkelig hjelp fra vårt team</p>
+                    <div class="chat-status">
+                        <div class="status-indicator online"></div>
+                        <span>Vi er online nå!</span>
+                    </div>
+                    <button class="chat-btn" onclick="startLiveChat()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                        </svg>
+                        Start Chat
+                    </button>
+
+                    <div class="quick-actions">
+                        <h4>Hurtigvalg:</h4>
+                        <button class="quick-action" onclick="quickChat('booking')">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2" stroke="currentColor" stroke-width="2"/>
+                                <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="2"/>
+                                <line x1="8" y1="2" x2="8" y2="6" stroke="currentColor" stroke-width="2"/>
+                                <line x1="3" y1="10" x2="21" y2="10" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                            Booking
+                        </button>
+                        <button class="quick-action" onclick="quickChat('technical')">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                            Teknisk
+                        </button>
+                        <button class="quick-action" onclick="quickChat('payment')">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                <rect x="1" y="4" width="22" height="16" rx="2" ry="2" stroke="currentColor" stroke-width="2"/>
+                                <line x1="1" y1="10" x2="23" y2="10" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                            Betaling
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-section">
+                <h3>Ofte stilte spørsmål</h3>
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <span>Hvor lang tid tar det å varme opp saunaen?</span>
+                            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <polyline points="6,9 12,15 18,9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Saunaen trenger vanligvis 45-60 minutter for å nå optimal temperatur (80-90°C). Dette avhenger av værforhold og utgangstemperatur. Vi anbefaler å starte oppvarmingen ca. 1 time før du planlegger å bruke saunaen.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <span>Hva må jeg ta med?</span>
+                            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <polyline points="6,9 12,15 18,9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Ta med 2-3 rene håndklær, en stor vannflaske (minimum 1L), og klyve eller strømper for utendørs bruk. Badeklær er valgfritt. Vi har også gratis parkering på stedet.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <span>Kan jeg avbestille eller endre bookingen min?</span>
+                            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <polyline points="6,9 12,15 18,9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Ja, du kan avbestille eller endre bookingen din inntil 24 timer før din reserverte tid. Kontakt oss på telefon eller e-post, eller bruk live chat funksjonen.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <span>Er det trygge parkering?</span>
+                            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <polyline points="6,9 12,15 18,9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Ja, vi har gratis og trygg parkering rett ved saunaen. Området er godt opplyst og overvåket. Du kan parkere trygt her dag og natt.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <span>Hva skjer hvis været blir dårlig?</span>
+                            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <polyline points="6,9 12,15 18,9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Saunaen kan brukes i de fleste værforhold! Faktisk er det ekstra hyggelig med sauna når det regner eller snør. Ved ekstremvær kontakter vi deg for å diskutere alternativer.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <span>Kan barn bruke saunaen?</span>
+                            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <polyline points="6,9 12,15 18,9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Barn over 12 år kan bruke saunaen sammen med voksne. Barn under 12 år må alltid ha voksen tilsyn og kortere saunaøkter (5-10 minutter). Vi anbefaler lavere temperatur for barn.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="location-section">
+                <h3>Finn frem til oss</h3>
+                <div class="location-grid">
+                    <div class="location-info">
+                        <div class="location-item">
+                            <h4>🚗 Med bil</h4>
+                            <p>Følg E6 nordover fra Oslo. Ta avkjøring 42 mot Saunastad. Følg skiltene til "Nyt Sauna". Gratis parkering på stedet.</p>
+                        </div>
+                        <div class="location-item">
+                            <h4>🚌 Kollektivt</h4>
+                            <p>Ta buss linje 123 fra Sentrum til "Saunavegen" holdeplass. 5 minutters gange derfra. Bussen går hver time.</p>
+                        </div>
+                        <div class="location-item">
+                            <h4>🚶 Til fots</h4>
+                            <p>Flott turmulighet! 2.5 km natursti fra Saunastad sentrum. Følg de blå merkene. Ta med pannelykt i mørke.</p>
+                        </div>
+                    </div>
+                    <div class="map-container">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2000.123456789!2d10.7522!3d59.9139!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTnCsDU0JzUwLjAiTiAxMMKwNDUnMDcuOSJF!5e0!3m2!1sen!2sno!4v1234567890"
+                            width="100%"
+                            height="300"
+                            style="border:0; border-radius: 12px;"
+                            allowfullscreen=""
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+
+            <div class="social-support-cta">
+                <h3>Følg oss for tips og oppdateringer</h3>
+                <p>Bli med i vårt community for eksklusive tilbud og saunatips</p>
+                <div class="social-buttons">
+                    <a href="https://instagram.com/nytsauna" target="_blank" class="social-follow instagram">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="currentColor" stroke-width="2"/>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" stroke="currentColor" stroke-width="2"/>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        Følg på Instagram
+                    </a>
+                    <a href="https://facebook.com/nytsauna" target="_blank" class="social-follow facebook">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                        </svg>
+                        Følg på Facebook
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Video Modal -->
+        <div id="video-modal" class="video-modal">
+            <div class="modal-content">
+                <button class="modal-close">&times;</button>
+                <div class="video-container">
+                    <iframe id="instruction-video" src="" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<script src="sauna-instructions.js"></script>
+</body>
+</html>
