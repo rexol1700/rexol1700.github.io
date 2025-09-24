@@ -8,22 +8,16 @@ class NavigationController {
     this.config = {
       mobileBreakpoint: 768,
       scrollThreshold: 50,
-      scrollOffset: 100,
-      throttleDelay: 16 // ~60fps
+      activeOffset: 0.3, // 30% of viewport height for better mobile detection
+      throttleDelay: 16
     };
     
     // State
     this.state = {
-      lastScrollTop: 0,
       isScrolled: false,
       ticking: false,
-      rafId: null
+      currentSection: null
     };
-    
-    // Bind methods
-    this.handleScroll = this.handleScroll.bind(this);
-    this.handleResize = this.handleResize.bind(this);
-    this.handleNavClick = this.handleNavClick.bind(this);
     
     this.init();
   }
@@ -35,20 +29,27 @@ class NavigationController {
     }
     
     this.setupEventListeners();
-    this.updateActiveNavLink(); // Set initial active state
+    // Initial check
+    this.handleScroll();
+    this.updateActiveNavLink();
   }
   
   setupEventListeners() {
-    // Use passive listeners for better scroll performance
-    window.addEventListener('scroll', this.throttledScroll.bind(this), { passive: true });
-    window.addEventListener('resize', this.debounce(this.handleResize, 250));
+    // Combined scroll handler for both sticky nav and active link updates
+    window.addEventListener('scroll', () => this.throttledScroll(), { passive: true });
+    window.addEventListener('resize', this.debounce(() => this.handleResize(), 250));
     
     this.navLinks.forEach(link => {
-      link.addEventListener('click', this.handleNavClick);
+      link.addEventListener('click', (e) => this.handleNavClick(e));
+    });
+    
+    // Also update on load and orientation change (important for mobile)
+    window.addEventListener('load', () => this.updateActiveNavLink());
+    window.addEventListener('orientationchange', () => {
+      setTimeout(() => this.updateActiveNavLink(), 100);
     });
   }
   
-  // Utilities
   isMobile() {
     return window.innerWidth <= this.config.mobileBreakpoint;
   }
@@ -59,7 +60,7 @@ class NavigationController {
   
   throttledScroll() {
     if (!this.state.ticking) {
-      this.state.rafId = requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
         this.handleScroll();
         this.updateActiveNavLink();
         this.state.ticking = false;
@@ -72,41 +73,38 @@ class NavigationController {
     let timeout;
     return (...args) => {
       clearTimeout(timeout);
-      timeout = setTimeout(() => func.apply(this, args), wait);
+      timeout = setTimeout(() => func(...args), wait);
     };
   }
   
-  // Sticky header logic
   handleScroll() {
-    if (!this.isMobile()) {
-      this.header.classList.remove('scrolled');
-      this.state.isScrolled = false;
-      return;
-    }
-    
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     
-    if (scrollTop > this.config.scrollThreshold && !this.state.isScrolled) {
-      this.header.classList.add('scrolled');
-      this.state.isScrolled = true;
-    } else if (scrollTop <= this.config.scrollThreshold && this.state.isScrolled) {
+    // Mobile sticky header
+    if (this.isMobile()) {
+      if (scrollTop > this.config.scrollThreshold && !this.state.isScrolled) {
+        this.header.classList.add('scrolled');
+        this.state.isScrolled = true;
+      } else if (scrollTop <= this.config.scrollThreshold && this.state.isScrolled) {
+        this.header.classList.remove('scrolled');
+        this.state.isScrolled = false;
+      }
+    } else {
+      // Desktop - remove scrolled class
       this.header.classList.remove('scrolled');
       this.state.isScrolled = false;
     }
-    
-    this.state.lastScrollTop = scrollTop;
   }
   
   handleResize() {
     this.handleScroll();
+    this.updateActiveNavLink();
   }
   
-  // Smooth scroll navigation
   handleNavClick(e) {
     const link = e.currentTarget;
     const href = link.getAttribute('href');
     
-    // Only handle hash links
     if (!href || !href.startsWith('#')) return;
     
     e.preventDefault();
@@ -114,76 +112,108 @@ class NavigationController {
     const targetId = href.substring(1);
     const targetElement = document.getElementById(targetId);
     
-    if (!targetElement) {
-      console.warn(`NavigationController: Target element #${targetId} not found`);
-      return;
-    }
+    if (!targetElement) return;
     
     this.scrollToElement(targetElement);
+    
+    // Immediately set active state
     this.setActiveLink(link);
     
-    // Update URL without triggering scroll
+    // Update URL
     history.pushState(null, null, href);
+    
+    // Close mobile menu if it exists
+    if (this.isMobile()) {
+      const mobileMenu = document.querySelector('.mobile-menu');
+      if (mobileMenu && mobileMenu.classList.contains('open')) {
+        mobileMenu.classList.remove('open');
+      }
+    }
   }
   
   scrollToElement(element) {
     const headerHeight = this.getHeaderHeight();
     const targetPosition = element.offsetTop - headerHeight;
     
-    // Use native smooth scroll with fallback
-    try {
-      window.scrollTo({
-        top: targetPosition,
-        behavior: 'smooth'
-      });
-    } catch (e) {
-      // Fallback for older browsers
-      window.scrollTo(0, targetPosition);
-    }
+    window.scrollTo({
+      top: targetPosition,
+      behavior: 'smooth'
+    });
   }
   
   setActiveLink(activeLink) {
     this.navLinks.forEach(link => {
-      link.classList.toggle('active', link === activeLink);
+      link.classList.remove('active');
+      link.setAttribute('aria-current', 'false');
     });
+    
+    activeLink.classList.add('active');
+    activeLink.setAttribute('aria-current', 'page');
   }
   
   updateActiveNavLink() {
     if (!this.sections.length || !this.navLinks.length) return;
     
+    const scrollPosition = window.scrollY;
+    const windowHeight = window.innerHeight;
     const headerHeight = this.getHeaderHeight();
-    const scrollPosition = window.scrollY + headerHeight + this.config.scrollOffset;
+    
+    // Calculate the trigger point (adjustable based on viewport)
+    const triggerPoint = scrollPosition + (windowHeight * this.config.activeOffset) + headerHeight;
     
     let currentSection = null;
     
-    // Find current section (iterate backwards for correct detection)
-    for (let i = this.sections.length - 1; i >= 0; i--) {
-      const section = this.sections[i];
-      if (scrollPosition >= section.offsetTop) {
-        currentSection = section.getAttribute('id');
-        break;
+    // Check if we're at the bottom of the page
+    const isAtBottom = (window.innerHeight + scrollPosition) >= document.documentElement.scrollHeight - 10;
+    
+    if (isAtBottom && this.sections.length > 0) {
+      // If at bottom, activate the last section
+      currentSection = this.sections[this.sections.length - 1].getAttribute('id');
+    } else {
+      // Find the current section based on scroll position
+      for (let i = 0; i < this.sections.length; i++) {
+        const section = this.sections[i];
+        const sectionTop = section.offsetTop;
+        const sectionBottom = sectionTop + section.offsetHeight;
+        
+        // Check if the trigger point is within this section
+        if (triggerPoint >= sectionTop && triggerPoint < sectionBottom) {
+          currentSection = section.getAttribute('id');
+          break;
+        }
+      }
+      
+      // If no section found and we're near the top, activate the first section
+      if (!currentSection && scrollPosition < 100 && this.sections.length > 0) {
+        currentSection = this.sections[0].getAttribute('id');
       }
     }
     
-    // Update active states
-    this.navLinks.forEach(link => {
-      const href = link.getAttribute('href');
-      const isActive = href === `#${currentSection}`;
-      link.classList.toggle('active', isActive);
+    // Only update if section changed
+    if (currentSection !== this.state.currentSection) {
+      this.state.currentSection = currentSection;
       
-      // Update ARIA attribute for accessibility
-      link.setAttribute('aria-current', isActive ? 'page' : 'false');
-    });
+      // Update active states
+      this.navLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        const isActive = currentSection && href === `#${currentSection}`;
+        
+        link.classList.toggle('active', isActive);
+        link.setAttribute('aria-current', isActive ? 'page' : 'false');
+      });
+      
+      // Debug log for mobile testing
+      if (this.isMobile()) {
+        console.log('Active section:', currentSection);
+      }
+    }
   }
   
-  // Cleanup method
   destroy() {
-    if (this.state.rafId) {
-      cancelAnimationFrame(this.state.rafId);
-    }
-    
     window.removeEventListener('scroll', this.throttledScroll);
     window.removeEventListener('resize', this.handleResize);
+    window.removeEventListener('load', this.updateActiveNavLink);
+    window.removeEventListener('orientationchange', this.updateActiveNavLink);
     
     this.navLinks.forEach(link => {
       link.removeEventListener('click', this.handleNavClick);
@@ -191,12 +221,11 @@ class NavigationController {
   }
 }
 
-// Initialize when DOM is ready
+// Initialize
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
     window.navigationController = new NavigationController();
   });
 } else {
-  // DOM already loaded
   window.navigationController = new NavigationController();
 }
