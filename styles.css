@@ -1954,6 +1954,26 @@ font-size: 0.9rem;
   transform: translateY(-1px);
 }
 
+.nav-link:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.nav-link.active {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 2px;
+    background: #fff;
+    border-radius: 2px;
+}
+
 /* Header Actions */
 .header-actions {
   flex-shrink: 0;
