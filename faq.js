@@ -1,3 +1,4 @@
+function toggleFAQ(element) {
 // Get the answer element that follows the question
     const answer = element.nextElementSibling;
     
