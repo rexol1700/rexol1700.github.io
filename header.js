@@ -1,110 +1,202 @@
-// Mobile sticky navigation
-function initMobileStickyNav() {
-  const header = document.querySelector('.site-header');
-  let lastScrollTop = 0;
-  let isScrolled = false;
-
-  // Only apply on mobile
-  function isMobile() {
-    return window.innerWidth <= 768;
+class NavigationController {
+  constructor() {
+    this.header = document.querySelector('.site-header');
+    this.navLinks = document.querySelectorAll('.nav-link');
+    this.sections = document.querySelectorAll('section');
+    
+    // Configuration
+    this.config = {
+      mobileBreakpoint: 768,
+      scrollThreshold: 50,
+      scrollOffset: 100,
+      throttleDelay: 16 // ~60fps
+    };
+    
+    // State
+    this.state = {
+      lastScrollTop: 0,
+      isScrolled: false,
+      ticking: false,
+      rafId: null
+    };
+    
+    // Bind methods
+    this.handleScroll = this.handleScroll.bind(this);
+    this.handleResize = this.handleResize.bind(this);
+    this.handleNavClick = this.handleNavClick.bind(this);
+    
+    this.init();
   }
-
-  function handleScroll() {
-    if (!isMobile()) {
-      // Remove scrolled class on desktop
-      if (header.classList.contains('scrolled')) {
-        header.classList.remove('scrolled');
-      }
+  
+  init() {
+    if (!this.header) {
+      console.warn('NavigationController: No header element found');
       return;
     }
-
+    
+    this.setupEventListeners();
+    this.updateActiveNavLink(); // Set initial active state
+  }
+  
+  setupEventListeners() {
+    // Use passive listeners for better scroll performance
+    window.addEventListener('scroll', this.throttledScroll.bind(this), { passive: true });
+    window.addEventListener('resize', this.debounce(this.handleResize, 250));
+    
+    this.navLinks.forEach(link => {
+      link.addEventListener('click', this.handleNavClick);
+    });
+  }
+  
+  // Utilities
+  isMobile() {
+    return window.innerWidth <= this.config.mobileBreakpoint;
+  }
+  
+  getHeaderHeight() {
+    return this.header?.offsetHeight || 0;
+  }
+  
+  throttledScroll() {
+    if (!this.state.ticking) {
+      this.state.rafId = requestAnimationFrame(() => {
+        this.handleScroll();
+        this.updateActiveNavLink();
+        this.state.ticking = false;
+      });
+      this.state.ticking = true;
+    }
+  }
+  
+  debounce(func, wait) {
+    let timeout;
+    return (...args) => {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => func.apply(this, args), wait);
+    };
+  }
+  
+  // Sticky header logic
+  handleScroll() {
+    if (!this.isMobile()) {
+      this.header.classList.remove('scrolled');
+      this.state.isScrolled = false;
+      return;
+    }
+    
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     
-    if (scrollTop > 50 && !isScrolled) {
-      header.classList.add('scrolled');
-      isScrolled = true;
-    } else if (scrollTop <= 50 && isScrolled) {
-      header.classList.remove('scrolled');
-      isScrolled = false;
+    if (scrollTop > this.config.scrollThreshold && !this.state.isScrolled) {
+      this.header.classList.add('scrolled');
+      this.state.isScrolled = true;
+    } else if (scrollTop <= this.config.scrollThreshold && this.state.isScrolled) {
+      this.header.classList.remove('scrolled');
+      this.state.isScrolled = false;
     }
+    
+    this.state.lastScrollTop = scrollTop;
   }
-
-  // Throttle scroll events for better performance
-  let ticking = false;
-  function onScroll() {
-    if (!ticking) {
-      requestAnimationFrame(() => {
-        handleScroll();
-        ticking = false;
+  
+  handleResize() {
+    this.handleScroll();
+  }
+  
+  // Smooth scroll navigation
+  handleNavClick(e) {
+    const link = e.currentTarget;
+    const href = link.getAttribute('href');
+    
+    // Only handle hash links
+    if (!href || !href.startsWith('#')) return;
+    
+    e.preventDefault();
+    
+    const targetId = href.substring(1);
+    const targetElement = document.getElementById(targetId);
+    
+    if (!targetElement) {
+      console.warn(`NavigationController: Target element #${targetId} not found`);
+      return;
+    }
+    
+    this.scrollToElement(targetElement);
+    this.setActiveLink(link);
+    
+    // Update URL without triggering scroll
+    history.pushState(null, null, href);
+  }
+  
+  scrollToElement(element) {
+    const headerHeight = this.getHeaderHeight();
+    const targetPosition = element.offsetTop - headerHeight;
+    
+    // Use native smooth scroll with fallback
+    try {
+      window.scrollTo({
+        top: targetPosition,
+        behavior: 'smooth'
       });
-      ticking = true;
+    } catch (e) {
+      // Fallback for older browsers
+      window.scrollTo(0, targetPosition);
     }
   }
-
-  window.addEventListener('scroll', onScroll);
-  window.addEventListener('resize', handleScroll); // Handle orientation changes
-}
-
-// Smooth scroll function for nav links
-function initSmoothScroll() {
-  const navLinks = document.querySelectorAll('.nav-link');
   
-  navLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
-      e.preventDefault();
-      
-      const targetId = link.getAttribute('href').substring(1);
-      const targetElement = document.getElementById(targetId);
-      
-      if (targetElement) {
-        // Get header height for offset
-        const headerHeight = document.querySelector('.site-header').offsetHeight;
-        
-        const targetPosition = targetElement.offsetTop - headerHeight;
-        
-        window.scrollTo({
-          top: targetPosition,
-          behavior: 'smooth'
-        });
-        
-        // Update active state
-        navLinks.forEach(nl => nl.classList.remove('active'));
-        link.classList.add('active');
-      }
+  setActiveLink(activeLink) {
+    this.navLinks.forEach(link => {
+      link.classList.toggle('active', link === activeLink);
     });
-  });
-}
-
-// Update active nav link based on scroll position
-function updateActiveNavOnScroll() {
-  const sections = document.querySelectorAll('section');
-  const navLinks = document.querySelectorAll('.nav-link');
+  }
   
-  window.addEventListener('scroll', () => {
-    const headerHeight = document.querySelector('.site-header').offsetHeight;
-    let current = '';
+  updateActiveNavLink() {
+    if (!this.sections.length || !this.navLinks.length) return;
     
-    sections.forEach(section => {
-      const sectionTop = section.offsetTop - headerHeight - 100; // Adding offset for better UX
-      const sectionHeight = section.offsetHeight;
+    const headerHeight = this.getHeaderHeight();
+    const scrollPosition = window.scrollY + headerHeight + this.config.scrollOffset;
+    
+    let currentSection = null;
+    
+    // Find current section (iterate backwards for correct detection)
+    for (let i = this.sections.length - 1; i >= 0; i--) {
+      const section = this.sections[i];
+      if (scrollPosition >= section.offsetTop) {
+        currentSection = section.getAttribute('id');
+        break;
+      }
+    }
+    
+    // Update active states
+    this.navLinks.forEach(link => {
+      const href = link.getAttribute('href');
+      const isActive = href === `#${currentSection}`;
+      link.classList.toggle('active', isActive);
       
-      if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
-        current = section.getAttribute('id');
-      }
+      // Update ARIA attribute for accessibility
+      link.setAttribute('aria-current', isActive ? 'page' : 'false');
     });
+  }
+  
+  // Cleanup method
+  destroy() {
+    if (this.state.rafId) {
+      cancelAnimationFrame(this.state.rafId);
+    }
     
-    navLinks.forEach(link => {
-      link.classList.remove('active');
-      if (link.getAttribute('href') === `#${current}`) {
-        link.classList.add('active');
-      }
+    window.removeEventListener('scroll', this.throttledScroll);
+    window.removeEventListener('resize', this.handleResize);
+    
+    this.navLinks.forEach(link => {
+      link.removeEventListener('click', this.handleNavClick);
     });
-  });
+  }
 }
 
-// Initialize when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-  initMobileStickyNav();
-  initSmoothScroll();
-  updateActiveNavOnScroll();
-});
+// Initialize when DOM is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => {
+    window.navigationController = new NavigationController();
+  });
+} else {
+  // DOM already loaded
+  window.navigationController = new NavigationController();
+}
