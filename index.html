@@ -16,8 +16,8 @@
   <div class="header-container">
     <div class="header-brand">
       <div class="logo">
-        <span class="logo-icon">🧖‍♀️</span>
-        <span class="logo-text">Selvbetjent sauna demo</span>
+        <span class="logo-icon">din logo</span>
+        <span class="logo-text">Selvbetjent sauna</span>
       </div>
     </div>
     
@@ -40,6 +40,92 @@
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v18.0"></script>
 <section class="social-section">
     <div class="social-container">
+        
+        <!-- SAUNA INSTRUCTIONS CONTENT -->
+        <div id="sauna-instructions" class="instructions-container">
+            <h2>Demoside</h2>
+            <div class="instructions-header">
+                <h2>Ditt saunarituale</h2>
+                <p>En trinn-for-trinn guide til den perfekte saunaopplevelsen</p>
+            </div>
+
+            <div class="instructions-grid">
+                <div class="instruction-card" data-step="1">
+                    <div class="card-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 2v6m0 8v6M4.93 4.93l4.24 4.24m5.66 5.66l4.24 4.24M2 12h6m8 0h6M4.93 19.07l4.24-4.24m5.66-5.66l4.24-4.24" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <h3>Tenne Saunaen</h3>
+                    <p>Følg den enkle prosessen for å få saunaen til optimal temperatur (80-90°C).</p>
+                    <div class="step-details">
+                        <ul>
+                            <li>Åpne luftventilene</li>
+                            <li>Legg ved i vedovnen</li>
+                            <li>Tenn opp og vent 45-60 min</li>
+                            <li>Temperatur: 80-90°C</li>
+                        </ul>
+                    </div>
+                    <button class="video-trigger" data-video="lighting-guide">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                            <polygon points="5,3 19,12 5,21" fill="currentColor"/>
+                        </svg>
+                        Se videoinstruks
+                    </button>
+                </div>
+
+                <div class="instruction-card" data-step="2">
+                    <div class="card-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h3>Sikkerhet Først</h3>
+                    <p>Viktige sikkerhetsregler for en trygg og hyggelig opplevelse.</p>
+                    <div class="step-details">
+                        <ul>
+                            <li>Aldri forlat brennende ovn</li>
+                            <li>Hold vanningsspann tilgjengelig</li>
+                            <li>Lytt til kroppen din</li>
+                            <li>Nødnummer: <strong>113</strong></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="instruction-card" data-step="3">
+                    <div class="card-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h3>Nyt Opplevelsen</h3>
+                    <p>Tips for å få mest mulig ut av din saunatime og skape minnerike øyeblikk.</p>
+                    <div class="step-details">
+                        <ul>
+                            <li>Start med 10-15 min økter</li>
+                            <li>Ta pauser for kjøling</li>
+                            <li>Hydrér regelmessig</li>
+                            <li>Del opplevelsen på sosiale medier!</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="weather-section">
+                <div class="weather-card">
+                    <h3>Dagens værforhold</h3>
+                    <div class="weather-widget">
+                        <div id="weather-widget" class="weather-display">
+                            <div class="weather-loading">
+                                <div class="loading-spinner"></div>
+                                <p>Henter værdata...</p>
+                            </div>
+                        </div>
+                    </div
+                </div>
+            </div>
+        </div>
+
         
         <!-- PAYMENT CONTENT -->
         <div class="payment-container">
@@ -124,90 +210,7 @@
             </div>
         </div>
 
-        <!-- SAUNA INSTRUCTIONS CONTENT -->
-        <div id="sauna-instructions" class="instructions-container">
-            <div class="instructions-header">
-                <h2>Ditt saunarituale</h2>
-                <p>En trinn-for-trinn guide til den perfekte saunaopplevelsen</p>
-            </div>
-
-            <div class="instructions-grid">
-                <div class="instruction-card" data-step="1">
-                    <div class="card-icon">
-                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
-                            <path d="M12 2v6m0 8v6M4.93 4.93l4.24 4.24m5.66 5.66l4.24 4.24M2 12h6m8 0h6M4.93 19.07l4.24-4.24m5.66-5.66l4.24-4.24" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                    </div>
-                    <h3>Tenne Saunaen</h3>
-                    <p>Følg den enkle prosessen for å få saunaen til optimal temperatur (80-90°C).</p>
-                    <div class="step-details">
-                        <ul>
-                            <li>Åpne luftventilene</li>
-                            <li>Legg ved i vedovnen</li>
-                            <li>Tenn opp og vent 45-60 min</li>
-                            <li>Temperatur: 80-90°C</li>
-                        </ul>
-                    </div>
-                    <button class="video-trigger" data-video="lighting-guide">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                            <polygon points="5,3 19,12 5,21" fill="currentColor"/>
-                        </svg>
-                        Se videoinstruks
-                    </button>
-                </div>
-
-                <div class="instruction-card" data-step="2">
-                    <div class="card-icon">
-                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
-                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
-                    <h3>Sikkerhet Først</h3>
-                    <p>Viktige sikkerhetsregler for en trygg og hyggelig opplevelse.</p>
-                    <div class="step-details">
-                        <ul>
-                            <li>Aldri forlat brennende ovn</li>
-                            <li>Hold vanningsspann tilgjengelig</li>
-                            <li>Lytt til kroppen din</li>
-                            <li>Nødnummer: <strong>113</strong></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="instruction-card" data-step="3">
-                    <div class="card-icon">
-                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
-                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
-                    <h3>Nyt Opplevelsen</h3>
-                    <p>Tips for å få mest mulig ut av din saunatime og skape minnerike øyeblikk.</p>
-                    <div class="step-details">
-                        <ul>
-                            <li>Start med 10-15 min økter</li>
-                            <li>Ta pauser for kjøling</li>
-                            <li>Hydrér regelmessig</li>
-                            <li>Del opplevelsen på sosiale medier!</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class="weather-section">
-                <div class="weather-card">
-                    <h3>Dagens værforhold</h3>
-                    <div class="weather-widget">
-                        <div id="weather-widget" class="weather-display">
-                            <div class="weather-loading">
-                                <div class="loading-spinner"></div>
-                                <p>Henter værdata...</p>
-                            </div>
-                        </div>
-                    </div
-                </div>
-            </div>
-        </div>
-
+        
         <!-- SOCIAL MEDIA CONTENT -->
     
 
