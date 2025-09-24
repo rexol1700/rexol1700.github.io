@@ -1,5 +1,5 @@
 /* Apply to body or main wrapper */
-body {
+html, body {
   background: linear-gradient(135deg, #1e3a8a 0%, #312e81 50%, #1e1b4b 100%);
   margin: 0;
   padding: 0;
