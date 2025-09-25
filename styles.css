@@ -343,6 +343,7 @@ pointer-events: none;
 }
 
 .instructions-container {
+  font-family: 'Inter', sans-serif;
 max-width: 1000px;
 margin: 0 auto;
 position: relative;
@@ -374,6 +375,7 @@ line-height: 1.6;
 }
 
 .instructions-grid {
+  font-family: 'Inter', sans-serif;
 display: grid;
 grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 gap: 30px;
@@ -381,6 +383,7 @@ margin-bottom: 60px;
 }
 
 .instruction-card {
+  font-family: 'Inter', sans-serif;
 background: rgba(255, 255, 255, 0.1);
 backdrop-filter: blur(20px);
 border: 1px solid rgba(255, 255, 255, 0.2);
