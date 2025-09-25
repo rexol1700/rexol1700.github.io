@@ -343,7 +343,6 @@ pointer-events: none;
 }
 
 .instructions-container {
-  font-family: 'Inter', sans-serif;
 max-width: 1000px;
 margin: 0 auto;
 position: relative;
